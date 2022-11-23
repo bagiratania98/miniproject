@@ -1,67 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html x-data="{ dark: false }" :class="dark ? 'dark' : '' " lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini Project</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
-<body class=" bg-blue-800 debug-screens">
+<body class="bg-mainColor debug-screens">
 
-  <div class="container bg-gray-100 mx-auto min-h-screen px-6 py-8">
+  <div class="container min-h-screen px-6 py-8 mx-auto bg-gray-100 dark:bg-gray-900">
 
     <! - page header / headings ->
     <section id="header">
+      <button @click="dark = !dark" class="btn-gray btn-icon btn focus:outline-none w-max">
+        <!-- Moon -->
+        <svg x-show="!dark" class="h-6 mr-1 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+        </svg>
+        <!-- Sun -->
+        <svg x-show="dark" class="h-6 mr-1 text-yellow-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+        </svg>
+        <span class="leading-4" x-text="dark ? 'Swith to normal mode' : 'Swith to dark mode'"></span></button>
       <div class="text-center">
-        <h1>Tom Gonzales home training <br> I'll get you in shape!</h1>
-        <h2>Muscle building • Functional training • Nutritional advice</h2>
+        <h1 class="leading-snug">Tom Gonzales home training<br>
+          <span class="text-4xl italic text-indigo-900 dark:text-indigo-300 sm:text-5xl lg:text-7xl opacity-80">
+            <q>&nbsp;I'll get you in shape!&nbsp;</q>
+          </span>
+        </h1>
+        <h2>Muscle building • Functional training<br class="sm:hidden"><span class="hidden sm:inline"> • </span>Nutritional advice</h2>
       </div>
     </section>
 
-    <section class="mt-8 grid grid-cols-2 gap-4" id="image_services">
+    <section class="grid mt-8 sm:grid-cols-2 sm:gap-5 md:gap-10 xl:w-9/12 xl:mx-auto" id="image_services">
       <! - picture ->
-      <div id = "image">
+      <div class="mx-auto sm:ml-auto mb-7 sm:mb-0" id = "image">
         <img src = "img/tom.jpg" alt = "Tom Gonzales Online Training">
       </div>
       <! - Services ->
       <div id = "services">
         <h3>I offer you:</h3>
-        <ul>
+        <ul class="ml-6 list-disc">
           <li>Lessons via Skype and you can record all sessions and watch them again later. </li>
           <li>Holistic full body training</li>
           <li>Training without equipment</li>
           <li>Pain reduction</li>
           <li>Tailored nutrition plans</li>
         </ul>
-        <h3>My qualifications:</h3>
-          <ul>
+        <!-- Only for >= md-->
+        <section class="hidden md:block" id="quali_right">
+          <h3 class="mt-10">My qualifications:</h3>
+          <ul class="ml-6 list-disc">
             <li>Certified nutritionist</li>
             <li>Certified fitness trainer</li>
             <li>5 years of experience in 1: 1 training</li>
           </ul>
+        </section>
       </div>
+    </section>
+
+    <!-- Only for <= sm-->
+    <section class="md:hidden" id="quali_bottom">
+      <h3 class="mt-5 md:mt-10">My qualifications:</h3>
+      <ul class="ml-6 list-disc">
+        <li class="leding-5 md:leading-normal">Certified nutritionist</li>
+        <li class="leding-5 md:leading-normal">Certified fitness trainer</li>
+        <li class="leding-5 md:leading-normal">5 years of experience in 1: 1 training</li>
+      </ul>
     </section>
 
     <! - Prices and payment ->
     <section class="mt-8" id = "price_payment">
-      <div class="w-8/12 mx-auto">
-        <h2>Prices and payment</h2>
+      <div class="mx-auto lg:w-8/12 xl:w-7/12">
+        <h2 class="xl:text-3xl">Prices and payment</h2>
         <p>My most important goal is that you get ahead with your goals.</p>
-        <p>In a free opening session we will discuss what you want to achieve and how much you can or want to spend. Then we are guaranteed to find a solution that suits you.</p>
+        <p class="text-justify">In a free opening session we will discuss what you want to achieve and how much you can or want to spend. Then we are guaranteed to find a solution that suits you.</p>
       </div>
     </section>
 
     <! - Contact ->
-    <section class="mt-8" id = "contact">
-      <div class="grid grid-cols-2 gap-4 w-8/12 mx-auto">
+    <section class="mt-8 mb-10" id = "contact">
+      <div class="flex justify-around lg:w-8/12 lg:mx-auto">
         <div id = "email">
           <p>Your message:</p>
-          <a href="mailto:markusgonzales@gmail.com">Send an Email</a>
+          <a class="flex items-center px-4 py-2 transition bg-gray-300 rounded shadow-sm dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600 w-max focus:ring-2 focus:ring-yellow-400 hover:bg-gray-400 hover:shadow-none" href="#">
+            <svg class="h-4 mr-1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+            <span class="text-lg 2xl:text-2xl">Send an Email</span>
+          </a>
         </div>
         <div id = "whatsApp_telefon">
           <p>WhatsApp:</p>
-          1 222 555 44 33
+          <span class="text-lg 2xl:text-2xl dark:text-gray-100">222 555 44 33</span>
         </div>
       </div>
     </section>
